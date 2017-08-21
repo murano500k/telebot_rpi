@@ -1,0 +1,18 @@
+#!/bin/bash
+
+export RELAY_PIN1=22
+export RELAY_PIN2=23
+export RELAY_PIN3=24
+export RELAY_PIN4=25
+export RELAY_PIN5=21
+
+gpio read $RELAY_PIN1
+echo $RELAY_PIN1 RELAY_PIN1: $?
+gpio read $RELAY_PIN2
+echo $RELAY_PIN2 RELAY_PIN2: $?
+gpio read $RELAY_PIN3
+echo $RELAY_PIN3 RELAY_PIN3: $?
+gpio read $RELAY_PIN4
+echo $RELAY_PIN4 RELAY_PIN1: $?
+gpio read $RELAY_PIN5
+echo $RELAY_PIN5 RELAY_PIN5: $?
