@@ -8,12 +8,12 @@ export RELAY_PIN5=21
 
 VAL=`gpio read $RELAY_PIN1`
 echo $RELAY_PIN1 RELAY_PIN1: $VAL
-VAL=`gpio read $RELAY_PIN2`
+VAL=`gpio read $RELAY_PIN1`
 echo $RELAY_PIN2 RELAY_PIN2: $VAL
-VAL=`gpio read $RELAY_PIN3` 
+VAL=`gpio read $RELAY_PIN1` 
 echo $RELAY_PIN3 RELAY_PIN3: $VAL
-VAL=`gpio read $RELAY_PIN4`
+VAL=`gpio read $RELAY_PIN1`
 echo $RELAY_PIN4 RELAY_PIN4: $VAL
-VAL=`gpio read $RELAY_PIN5`
+VAL=`gpio read $RELAY_PIN1`
 echo $RELAY_PIN5 RELAY_PIN5: $VAL
 

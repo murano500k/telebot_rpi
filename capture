@@ -1,0 +1,4 @@
+#!/bin/bash
+mkdir -p ~/captures
+raspistill -o ~/captures/image.jpg
+echo capture result=$? ~/captures/image.jpg

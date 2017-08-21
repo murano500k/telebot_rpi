@@ -139,14 +139,15 @@ class YourBot(telepot.Bot):
                         bot.sendMessage(chat_id, output, disable_web_page_preview=True)
                     else:
                         bot.sendMessage(chat_id, "No output.", disable_web_page_preview=True)
-                elif msg['text'] == "/all0" and chat_id not in settingmemth:
+                elif msg['text'] == "/capture" and chat_id not in settingmemth:
                     bot.sendChatAction(chat_id, 'typing')
-                    p = Popen('/home/pi/ProjectRpi/all0.sh', shell=True, stdin=PIPE, stdout=PIPE, stderr=STDOUT, close_fds=True)
+                    p = Popen('/bin/capture', shell=True, stdin=PIPE, stdout=PIPE, stderr=STDOUT, close_fds=True)
                     output = p.stdout.read()
                     if output != b'':
                         bot.sendMessage(chat_id, output, disable_web_page_preview=True)
+			bot.send_photo(chat_id=chat_id, photo=open('/home/pi/captures/image.jpg', 'rb'))
                     else:
-                        bot.sendMessage(chat_id, "No output.", disable_web_page_preview=True)
+                        bot.sendMessage(chat_id, "Something wrong", disable_web_page_preview=True)
                 elif chat_id in settingmemth:
                     bot.sendChatAction(chat_id, 'typing')
                     try:
