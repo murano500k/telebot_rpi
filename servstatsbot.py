@@ -131,6 +131,22 @@ class YourBot(telepot.Bot):
                     bot.sendChatAction(chat_id, 'typing')
                     settingmemth.append(chat_id)
                     bot.sendMessage(chat_id, "Send me a new memory threshold to monitor?", reply_markup=stopmarkup)
+                elif msg['text'] == "/all1" and chat_id not in settingmemth:
+                    bot.sendChatAction(chat_id, 'typing')
+                    p = Popen('/home/pi/ProjectRpi/all1.sh', shell=True, stdin=PIPE, stdout=PIPE, stderr=STDOUT, close_fds=True)
+                    output = p.stdout.read()
+                    if output != b'':
+                        bot.sendMessage(chat_id, output, disable_web_page_preview=True)
+                    else:
+                        bot.sendMessage(chat_id, "No output.", disable_web_page_preview=True)
+                elif msg['text'] == "/all0" and chat_id not in settingmemth:
+                    bot.sendChatAction(chat_id, 'typing')
+                    p = Popen('/home/pi/ProjectRpi/all0.sh', shell=True, stdin=PIPE, stdout=PIPE, stderr=STDOUT, close_fds=True)
+                    output = p.stdout.read()
+                    if output != b'':
+                        bot.sendMessage(chat_id, output, disable_web_page_preview=True)
+                    else:
+                        bot.sendMessage(chat_id, "No output.", disable_web_page_preview=True)
                 elif chat_id in settingmemth:
                     bot.sendChatAction(chat_id, 'typing')
                     try:
