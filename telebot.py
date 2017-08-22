@@ -89,8 +89,8 @@ def sendCmd(chat_id, cmd):
     GPIO.setup(RELAY_PIN3, GPIO.OUT)
     GPIO.setup(RELAY_PIN4, GPIO.OUT)
     GPIO.setup(RELAY_PIN5, GPIO.OUT)
-    rNum = cmd.split("")[1]
-    rVal = cmd.split("")[2]
+    rNum = cmd.split(" ")[1]
+    rVal = cmd.split(" ")[2]
     GPIO.output(rNum, rVal)
     reply = str(rNum) + " RELAY_PIN: " + str(rVal)
     print(reply)
