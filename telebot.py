@@ -60,12 +60,6 @@ def plotmemgraph(memlist, xaxis, tmperiod):
 
 def printRelayPins(chat_id):
     bot.sendChatAction(chat_id, 'typing')
-    GPIO.setmode(GPIO.BCM)  # set board mode to Broadcom
-    GPIO.setup(RELAY_PIN1, GPIO.OUT)  
-    GPIO.setup(RELAY_PIN2, GPIO.OUT)  
-    GPIO.setup(RELAY_PIN3, GPIO.OUT)  
-    GPIO.setup(RELAY_PIN4, GPIO.OUT)  
-    GPIO.setup(RELAY_PIN5, GPIO.OUT)
     val1=GPIO.input(RELAY_PIN1)
     val2=GPIO.input(RELAY_PIN2)
     val3=GPIO.input(RELAY_PIN3)
@@ -83,12 +77,7 @@ def printRelayPins(chat_id):
 def sendCmd(chat_id, cmd):
     bot.sendChatAction(chat_id, 'typing')
     print("cmd: " + cmd)
-    GPIO.setmode(GPIO.BCM)  # set board mode to Broadcom
-    GPIO.setup(RELAY_PIN1, GPIO.OUT)
-    GPIO.setup(RELAY_PIN2, GPIO.OUT)
-    GPIO.setup(RELAY_PIN3, GPIO.OUT)
-    GPIO.setup(RELAY_PIN4, GPIO.OUT)
-    GPIO.setup(RELAY_PIN5, GPIO.OUT)
+
     rNum = int(cmd.split(" ")[1])
     rVal = int(cmd.split(" ")[2])
     GPIO.output(rNum, rVal)
@@ -182,6 +171,12 @@ def printStats(chat_id):
 
 TOKEN = telegrambot
 
+GPIO.setmode(GPIO.BCM)  # set board mode to Broadcom
+GPIO.setup(RELAY_PIN1, GPIO.OUT)
+GPIO.setup(RELAY_PIN2, GPIO.OUT)
+GPIO.setup(RELAY_PIN3, GPIO.OUT)
+GPIO.setup(RELAY_PIN4, GPIO.OUT)
+GPIO.setup(RELAY_PIN5, GPIO.OUT)
 bot = YourBot(TOKEN)
 bot.message_loop()
 tr = 0
