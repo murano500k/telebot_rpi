@@ -103,7 +103,7 @@ class YourBot(telepot.Bot):
             if content_type == 'text':
                 if msg['text'] == '/stats' and chat_id not in shellexecution:
                     printStats(chat_id)
-                elif msg['text'] == "Stop":
+                elif msg['text'] == "/stop":
                     clearall(chat_id)
                     bot.sendMessage(chat_id, "All operations stopped.", reply_markup=hide_keyboard)
                 elif msg['text'] == "/shell" and chat_id not in shellexecution:
@@ -123,7 +123,17 @@ class YourBot(telepot.Bot):
                     bot.sendPhoto(chat_id, plotmemgraph(memlist, xaxis, tmperiod))
                 elif msg['text'] == "/rget":
                     printRelayPins(chat_id)
-
+                elif msg['text'].contains("/rcmd"):
+                    sendCmd(chat_id, msg['text'])
+                elif msg['text'].contains("/capture"):
+                    bot.sendChatAction(chat_id, 'typing')
+                    p = Popen('/bin/capture', shell=True, stdin=PIPE, stdout=PIPE, stderr=STDOUT, close_fds=True)
+                    output = p.stdout.read()
+                    if output != b'':
+                        bot.sendMessage(chat_id, output, disable_web_page_preview=True)
+                        bot.sendPhoto(chat_id=chat_id, photo=open('/home/pi/captures/image.jpg', 'rb'))
+                    else:
+                        bot.sendMessage(chat_id, "Something wrong", disable_web_page_preview=True)
 
 
 def printStats(chat_id):
