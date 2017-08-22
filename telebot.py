@@ -59,7 +59,8 @@ def plotmemgraph(memlist, xaxis, tmperiod):
 
 
 def printRelayPins(chat_id):
-    #GPIO.setmode(GPIO.BCM)  # set board mode to Broadcom
+    bot.sendChatAction(chat_id, 'typing')
+    GPIO.setmode(GPIO.BCM)  # set board mode to Broadcom
     GPIO.setup(RELAY_PIN1, GPIO.OUT)  
     GPIO.setup(RELAY_PIN2, GPIO.OUT)  
     GPIO.setup(RELAY_PIN3, GPIO.OUT)  
@@ -74,8 +75,9 @@ def printRelayPins(chat_id):
     bot.sendMessage(chat_id, reply, disable_web_page_preview=True)
 
 def sendCmd(chat_id, cmd):
+    bot.sendChatAction(chat_id, 'typing')
     print("cmd: " + cmd)
-    #GPIO.setmode(GPIO.BCM)  # set board mode to Broadcom
+    GPIO.setmode(GPIO.BCM)  # set board mode to Broadcom
     GPIO.setup(RELAY_PIN1, GPIO.OUT)
     GPIO.setup(RELAY_PIN2, GPIO.OUT)
     GPIO.setup(RELAY_PIN3, GPIO.OUT)
