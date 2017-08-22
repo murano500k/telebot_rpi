@@ -133,7 +133,7 @@ class YourBot(telepot.Bot):
                     printRelayPins(chat_id)
                 elif msg['text'].contains("/rcmd"):
                     sendCmd(chat_id, msg['text'])
-                elif msg['text'].contains("/capture"):
+                elif "/capture" in msg['text']:
                     bot.sendChatAction(chat_id, 'typing')
                     p = Popen('/bin/capture', shell=True, stdin=PIPE, stdout=PIPE, stderr=STDOUT, close_fds=True)
                     output = p.stdout.read()
