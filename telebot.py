@@ -66,11 +66,17 @@ def printRelayPins(chat_id):
     GPIO.setup(RELAY_PIN3, GPIO.OUT)  
     GPIO.setup(RELAY_PIN4, GPIO.OUT)  
     GPIO.setup(RELAY_PIN5, GPIO.OUT)
-    reply = RELAY_PIN1 + " RELAY_PIN1: " + GPIO.input(RELAY_PIN1) + "\n" + \
-            RELAY_PIN2 + " RELAY_PIN2: " + GPIO.input(RELAY_PIN2) + "\n" + \
-            RELAY_PIN3 + " RELAY_PIN3: " + GPIO.input(RELAY_PIN3) + "\n" + \
-            RELAY_PIN4 + " RELAY_PIN4: " + GPIO.input(RELAY_PIN4) + "\n" + \
-            RELAY_PIN5 + " RELAY_PIN5: " + GPIO.input(RELAY_PIN5)
+    val1=GPIO.input(RELAY_PIN1)
+    val2=GPIO.input(RELAY_PIN2)
+    val3=GPIO.input(RELAY_PIN3)
+    val4=GPIO.input(RELAY_PIN4)
+    val5=GPIO.input(RELAY_PIN5)
+
+    reply = RELAY_PIN1 + " RELAY_PIN1: " + val1 + "\n" + \
+            RELAY_PIN2 + " RELAY_PIN2: " + val2 + "\n" + \
+            RELAY_PIN3 + " RELAY_PIN3: " + val3 + "\n" + \
+            RELAY_PIN4 + " RELAY_PIN4: " + val4 + "\n" + \
+            RELAY_PIN5 + " RELAY_PIN5: " + val5
     print(reply)
     bot.sendMessage(chat_id, reply, disable_web_page_preview=True)
 
