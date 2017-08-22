@@ -131,9 +131,9 @@ class YourBot(telepot.Bot):
                     bot.sendPhoto(chat_id, plotmemgraph(memlist, xaxis, tmperiod))
                 elif msg['text'] == "/rget":
                     printRelayPins(chat_id)
-                elif msg['text'].contains("/rcmd"):
+                elif "/rcmd" in msg['text']:
                     sendCmd(chat_id, msg['text'])
-                elif "/capture" in msg['text']:
+                elif msg['text'] == "/capture":
                     bot.sendChatAction(chat_id, 'typing')
                     p = Popen('/bin/capture', shell=True, stdin=PIPE, stdout=PIPE, stderr=STDOUT, close_fds=True)
                     output = p.stdout.read()
