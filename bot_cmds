@@ -5,3 +5,4 @@ capture - get a photo
 rget - print relays status
 rcmd - send on/off command (format rcmd PIN VALUE)
 stop - stop all
+dht - get temp and humidity
