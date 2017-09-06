@@ -130,7 +130,7 @@ def write_cmd(chat_id, cmd):
     rNum = int(cmd.split(" ")[1])
     rVal = int(cmd.split(" ")[2])
     GPIO.output(rNum, rVal)
-    reply = "Write " + str(rVal) + "to pin[" + str(rVal) + "]"
+    reply = "Write " + str(rVal) + " to pin[" + str(rVal) + "]"
     print(reply)
     bot.sendMessage(chat_id, reply, disable_web_page_preview=True)
     bot.sendMessage(chat_id, "______________\nCurrent status:", disable_web_page_preview=True)
@@ -195,7 +195,7 @@ def print_stats(chat_id):
     bot.sendMessage(chat_id, reply, disable_web_page_preview=True)
 
 TOKEN = telegrambot
-
+GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BCM)  # set board mode to Broadcom
 GPIO.setup(RELAY_PIN1, GPIO.OUT)
 GPIO.setup(RELAY_PIN2, GPIO.OUT)
