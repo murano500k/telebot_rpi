@@ -1,8 +1,9 @@
+capture - get a photo
+read - print relays status
+write - send on/off command (format write PIN VALUE)
+temp - get temp and humidity
+getall - get all data
+stop - stop all
 stats - gives summed statistics about memory \ disk \ processes
 shell - goes into the mode of executing shell commands & sends you the output
 memgraph - print memgraph
-capture - get a photo
-rget - print relays status
-rcmd - send on/off command (format rcmd PIN VALUE)
-stop - stop all
-dht - get temp and humidity

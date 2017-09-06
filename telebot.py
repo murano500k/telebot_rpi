@@ -23,7 +23,7 @@ settingmemth = []
 setpolling = []
 graphstart = datetime.now()
 
-stopmarkup = {'keyboard': [['Stop']]}
+stopmarkup = {'keyboard': [['/stop']]}
 hide_keyboard = {'hide_keyboard': True}
 
 RELAY_PIN1 = 22
@@ -91,55 +91,48 @@ class YourBot(telepot.Bot):
                     tmperiod = "Last %.2f hours" % ((datetime.now() - graphstart).total_seconds() / 3600)
                     bot.sendPhoto(chat_id, plotmemgraph(memlist, xaxis, tmperiod))
 
-                elif msg['text'] == "/read":
+                elif msg['text'] == "/readpin":
                     print_relay_pins(chat_id)
-                elif msg['text'].find("/write") != -1:
+                elif msg['text'].find("/writepin") != -1:
                     write_cmd(chat_id, msg['text'])
                 elif msg['text'] == "/capture":
                     get_photo(chat_id)
-                elif msg['text'] == "/temp":
+                elif msg['text'] == "/sensor":
                     get_temp(chat_id)
-                elif msg['text'] == "/getall":
+                elif msg['text'] == "/all":
                     print_relay_pins(chat_id)
                     get_temp(chat_id)
                     get_photo(chat_id)
                 else:
-                    bot.sendMessage(chat_id, "command not found:" + msg['text'], disable_web_page_preview=True)
+                    bot.sendMessage(chat_id, "command not found: " + msg['text'], disable_web_page_preview=True)
 
 
 def print_relay_pins(chat_id):
     bot.sendChatAction(chat_id, 'typing')
-    val1=GPIO.input(RELAY_PIN1)
-    val2=GPIO.input(RELAY_PIN2)
-    val3=GPIO.input(RELAY_PIN3)
-    val4=GPIO.input(RELAY_PIN4)
-    val5=GPIO.input(RELAY_PIN5)
-
-    reply = "Current status:\n" + "pin[" + str(RELAY_PIN1) + "] " + str(val1) + "\n" + \
-            "pin[" + str(RELAY_PIN2) + "] " + str(val2) + "\n" + \
-            "pin[" + str(RELAY_PIN3) + "] " + str(val3) + "\n" + \
-            "pin[" + str(RELAY_PIN4) + "] " + str(val4) + "\n" + \
-            "pin[" + str(RELAY_PIN5) + "] " + str(val5) + "\n______________"
-    print(reply)
-    bot.sendMessage(chat_id, reply, disable_web_page_preview=True)
+    p = Popen('/home/pi/telebot_rpi/readpin', shell=True, stdin=PIPE, stdout=PIPE,
+              stderr=STDOUT, close_fds=True)
+    output = p.stdout.read()
+    if output != b'':
+        bot.sendMessage(chat_id, output, disable_web_page_preview=True)
+    else:
+        bot.sendMessage(chat_id, "Something wrong", disable_web_page_preview=True)
 
 
 def write_cmd(chat_id, cmd):
-    bot.sendChatAction(chat_id, 'typing')
-    print("cmd: " + cmd)
+    bot.sendChatAction(chat_id, 'upload_document')
     rNum = int(cmd.split(" ")[1])
     rVal = int(cmd.split(" ")[2])
-    GPIO.output(rNum, rVal)
-    reply = "Write " + str(rVal) + " to pin[" + str(rVal) + "]"
-    print(reply)
-    bot.sendMessage(chat_id, reply, disable_web_page_preview=True)
-    bot.sendMessage(chat_id, "______________\nCurrent status:", disable_web_page_preview=True)
+    p = Popen('/home/pi/telebot_rpi/writepin ' + str(rNum) + ' ' + str(rVal), shell=True, stdin=PIPE, stdout=PIPE,
+          stderr=STDOUT, close_fds=True)
+    output = p.stdout.read()
+    if output != b'':
+        bot.sendMessage(chat_id, output, disable_web_page_preview=True)
     print_relay_pins(chat_id)
 
 
 def get_photo(chat_id):
     bot.sendChatAction(chat_id, 'upload_photo')
-    p = Popen('/bin/capture', shell=True, stdin=PIPE, stdout=PIPE, stderr=STDOUT, close_fds=True)
+    p = Popen('/home/pi/telebot_rpi/capture', shell=True, stdin=PIPE, stdout=PIPE, stderr=STDOUT, close_fds=True)
     output = p.stdout.read()
     if output != b'':
         bot.sendPhoto(chat_id=chat_id, photo=open('/home/pi/captures/image.jpg', 'rb'))
@@ -148,8 +141,8 @@ def get_photo(chat_id):
 
 
 def get_temp(chat_id):
-    bot.sendChatAction(chat_id, 'typing')
-    p = Popen('/home/pi/telebot_rpi/sensor.sh', shell=True, stdin=PIPE, stdout=PIPE,
+    bot.sendChatAction(chat_id, 'record_video_note')
+    p = Popen('/home/pi/telebot_rpi/sensor', shell=True, stdin=PIPE, stdout=PIPE,
               stderr=STDOUT, close_fds=True)
     output = p.stdout.read()
     if output != b'':
