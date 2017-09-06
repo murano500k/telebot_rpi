@@ -119,7 +119,7 @@ def print_relay_pins(chat_id):
             "pin[" + str(RELAY_PIN2) + "] " + str(val2) + "\n" + \
             "pin[" + str(RELAY_PIN3) + "] " + str(val3) + "\n" + \
             "pin[" + str(RELAY_PIN4) + "] " + str(val4) + "\n" + \
-            "pin[" + str(RELAY_PIN5) + "] " + str(val5) + "\n______________"
+            "pin[" + str(RELAY_PIN5) + "] " + str(val5)
     print(reply)
     bot.sendMessage(chat_id, reply, disable_web_page_preview=True)
 
@@ -133,7 +133,6 @@ def write_cmd(chat_id, cmd):
     reply = "Write " + str(rVal) + " to pin[" + str(rVal) + "]"
     print(reply)
     bot.sendMessage(chat_id, reply, disable_web_page_preview=True)
-    bot.sendMessage(chat_id, "______________\nCurrent status:", disable_web_page_preview=True)
     print_relay_pins(chat_id)
 
 
