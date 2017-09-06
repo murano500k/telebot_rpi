@@ -120,6 +120,17 @@ class YourBot(telepot.Bot):
                     bot.sendPhoto(chat_id, plotmemgraph(memlist, xaxis, tmperiod))
                 elif msg['text'] == "/rget":
                     printRelayPins(chat_id)
+<<<<<<< HEAD
+=======
+                elif msg['text'] == "/dht":
+                    bot.sendChatAction(chat_id, 'typing')
+                    p = Popen("/home/pi/Adafruit_Python_DHT/examples/AdafruitDHT.py 22 18", shell=True, stdin=PIPE, stdout=PIPE, stderr=STDOUT, close_fds=True)
+                    output = p.stdout.read()
+                    if output != b'':
+                        bot.sendMessage(chat_id, output, disable_web_page_preview=True)
+                    else:
+                        bot.sendMessage(chat_id, "No output.", disable_web_page_preview=True)
+>>>>>>> 8703d86ea132a93b999da21ca30c10e1004f8f90
                 elif "/rcmd" in msg['text']:
                     sendCmd(chat_id, msg['text'])
                 elif msg['text'] == "/capture":
@@ -131,7 +142,11 @@ class YourBot(telepot.Bot):
                         bot.sendPhoto(chat_id=chat_id, photo=open('/home/pi/captures/image.jpg', 'rb'))
                     else:
                         bot.sendMessage(chat_id, "Something wrong", disable_web_page_preview=True)
+<<<<<<< HEAD
                 elif msg['text'] == "/temp":
+=======
+        elif msg['text'] == "/temp":
+>>>>>>> 8703d86ea132a93b999da21ca30c10e1004f8f90
                     bot.sendChatAction(chat_id, 'typing')
                     p = Popen('/home/pi/Adafruit_Python_DHT/examples/AdafruitDHT.py  22 18', shell=True, stdin=PIPE, stdout=PIPE, stderr=STDOUT, close_fds=True)
                     output = p.stdout.read()
