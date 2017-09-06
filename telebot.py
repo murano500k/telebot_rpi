@@ -58,26 +58,6 @@ def plotmemgraph(memlist, xaxis, tmperiod):
     return f
 
 
-def print_relay_pins(chat_id):
-    bot.sendChatAction(chat_id, 'typing')
-    val1=GPIO.input(RELAY_PIN1)
-    val2=GPIO.input(RELAY_PIN2)
-    val3=GPIO.input(RELAY_PIN3)
-    val4=GPIO.input(RELAY_PIN4)
-    val5=GPIO.input(RELAY_PIN5)
-
-    reply = str(RELAY_PIN1) + " RELAY_PIN1: " + str(val1) + "\n" + \
-            str(RELAY_PIN2) + " RELAY_PIN2: " + str(val2) + "\n" + \
-            str(RELAY_PIN3) + " RELAY_PIN3: " + str(val3) + "\n" + \
-            str(RELAY_PIN4) + " RELAY_PIN4: " + str(val4) + "\n" + \
-            str(RELAY_PIN5) + " RELAY_PIN5: " + str(val5)
-    print(reply)
-    bot.sendMessage(chat_id, reply, disable_web_page_preview=True)
-
-
-
-
-
 class YourBot(telepot.Bot):
     def __init__(self, *args, **kwargs):
         super(YourBot, self).__init__(*args, **kwargs)
@@ -127,14 +107,33 @@ class YourBot(telepot.Bot):
                     bot.sendMessage(chat_id, "command not found:" + msg['text'], disable_web_page_preview=True)
 
 
+def print_relay_pins(chat_id):
+    bot.sendChatAction(chat_id, 'typing')
+    val1=GPIO.input(RELAY_PIN1)
+    val2=GPIO.input(RELAY_PIN2)
+    val3=GPIO.input(RELAY_PIN3)
+    val4=GPIO.input(RELAY_PIN4)
+    val5=GPIO.input(RELAY_PIN5)
+
+    reply = "Current status:\n" + "pin[" + str(RELAY_PIN1) + "] " + str(val1) + "\n" + \
+            "pin[" + str(RELAY_PIN2) + "] " + str(val2) + "\n" + \
+            "pin[" + str(RELAY_PIN3) + "] " + str(val3) + "\n" + \
+            "pin[" + str(RELAY_PIN4) + "] " + str(val4) + "\n" + \
+            "pin[" + str(RELAY_PIN5) + "] " + str(val5) + "\n______________"
+    print(reply)
+    bot.sendMessage(chat_id, reply, disable_web_page_preview=True)
+
+
 def write_cmd(chat_id, cmd):
     bot.sendChatAction(chat_id, 'typing')
     print("cmd: " + cmd)
     rNum = int(cmd.split(" ")[1])
     rVal = int(cmd.split(" ")[2])
     GPIO.output(rNum, rVal)
-    reply = str(rNum) + " RELAY_PIN: " + str(rVal)
+    reply = "Write " + str(rVal) + "to pin[" + str(rVal) + "]"
     print(reply)
+    bot.sendMessage(chat_id, reply, disable_web_page_preview=True)
+    bot.sendMessage(chat_id, "______________\nCurrent status:", disable_web_page_preview=True)
     print_relay_pins(chat_id)
 
 
