@@ -32,6 +32,7 @@ RELAY_PIN3 = 24
 RELAY_PIN4 = 25
 RELAY_PIN5 = 21
 
+
 def clearall(chat_id):
     if chat_id in shellexecution:
         shellexecution.remove(chat_id)
@@ -40,9 +41,8 @@ def clearall(chat_id):
     if chat_id in setpolling:
         setpolling.remove(chat_id)
 
+
 def plotmemgraph(memlist, xaxis, tmperiod):
-    # print(memlist)
-    # print(xaxis)
     plt.xlabel(tmperiod)
     plt.ylabel('% Used')
     plt.title('Memory Usage Graph')
@@ -58,7 +58,7 @@ def plotmemgraph(memlist, xaxis, tmperiod):
     return f
 
 
-def printRelayPins(chat_id):
+def print_relay_pins(chat_id):
     bot.sendChatAction(chat_id, 'typing')
     val1=GPIO.input(RELAY_PIN1)
     val2=GPIO.input(RELAY_PIN2)
@@ -74,7 +74,8 @@ def printRelayPins(chat_id):
     print(reply)
     bot.sendMessage(chat_id, reply, disable_web_page_preview=True)
 
-def sendCmd(chat_id, cmd):
+
+def send_cmd(chat_id, cmd):
     bot.sendChatAction(chat_id, 'typing')
     print("cmd: " + cmd)
 
@@ -99,7 +100,7 @@ class YourBot(telepot.Bot):
         if chat_id in adminchatid:  # Store adminchatid variable in tokens.py
             if content_type == 'text':
                 if msg['text'] == '/stats' and chat_id not in shellexecution:
-                    printStats(chat_id)
+                    print_stats(chat_id)
                 elif msg['text'] == "/stop":
                     clearall(chat_id)
                     bot.sendMessage(chat_id, "All operations stopped.", reply_markup=hide_keyboard)
@@ -119,37 +120,20 @@ class YourBot(telepot.Bot):
                     tmperiod = "Last %.2f hours" % ((datetime.now() - graphstart).total_seconds() / 3600)
                     bot.sendPhoto(chat_id, plotmemgraph(memlist, xaxis, tmperiod))
                 elif msg['text'] == "/rget":
-                    printRelayPins(chat_id)
-                elif msg['text'] == "/dht":
-                    bot.sendChatAction(chat_id, 'typing')
-                    p = Popen("/home/pi/Adafruit_Python_DHT/examples/AdafruitDHT.py 22 18", shell=True, stdin=PIPE, stdout=PIPE, stderr=STDOUT, close_fds=True)
-                    output = p.stdout.read()
-                    if output != b'':
-                        bot.sendMessage(chat_id, output, disable_web_page_preview=True)
-                    else:
-                        bot.sendMessage(chat_id, "No output.", disable_web_page_preview=True)
+                    print_relay_pins(chat_id)
                 elif "/rcmd" in msg['text']:
-                    sendCmd(chat_id, msg['text'])
+                    send_cmd(chat_id, msg['text'])
                 elif msg['text'] == "/capture":
-                    bot.sendChatAction(chat_id, 'typing')
+                    bot.sendChatAction(chat_id, 'upload_photo')
                     p = Popen('/bin/capture', shell=True, stdin=PIPE, stdout=PIPE, stderr=STDOUT, close_fds=True)
                     output = p.stdout.read()
                     if output != b'':
-                        bot.sendMessage(chat_id, output, disable_web_page_preview=True)
                         bot.sendPhoto(chat_id=chat_id, photo=open('/home/pi/captures/image.jpg', 'rb'))
                     else:
                         bot.sendMessage(chat_id, "Something wrong", disable_web_page_preview=True)
-        elif msg['text'] == "/temp":
-                    bot.sendChatAction(chat_id, 'typing')
-                    p = Popen('/home/pi/Adafruit_Python_DHT/examples/AdafruitDHT.py  22 18', shell=True, stdin=PIPE, stdout=PIPE, stderr=STDOUT, close_fds=True)
-                    output = p.stdout.read()
-                    if output != b'':
-                        bot.sendMessage(chat_id, output, disable_web_page_preview=True)
-                    else:
-                        bot.sendMessage(chat_id, "Something wrong", disable_web_page_preview=True)
 
 
-def printStats(chat_id):
+def print_stats(chat_id):
     bot.sendChatAction(chat_id, 'typing')
     memory = psutil.virtual_memory()
     disk = psutil.disk_usage('/')
