@@ -121,7 +121,7 @@ class YourBot(telepot.Bot):
                 elif msg['text'] == "/rget":
                     printRelayPins(chat_id)
                 elif msg['text'] == "/dht":
-                	bot.sendChatAction(chat_id, 'typing')
+                    bot.sendChatAction(chat_id, 'typing')
                     p = Popen("/home/pi/Adafruit_Python_DHT/examples/AdafruitDHT.py 22 18", shell=True, stdin=PIPE, stdout=PIPE, stderr=STDOUT, close_fds=True)
                     output = p.stdout.read()
                     if output != b'':
@@ -139,7 +139,7 @@ class YourBot(telepot.Bot):
                         bot.sendPhoto(chat_id=chat_id, photo=open('/home/pi/captures/image.jpg', 'rb'))
                     else:
                         bot.sendMessage(chat_id, "Something wrong", disable_web_page_preview=True)
-		elif msg['text'] == "/temp":
+        elif msg['text'] == "/temp":
                     bot.sendChatAction(chat_id, 'typing')
                     p = Popen('/home/pi/Adafruit_Python_DHT/examples/AdafruitDHT.py  22 18', shell=True, stdin=PIPE, stdout=PIPE, stderr=STDOUT, close_fds=True)
                     output = p.stdout.read()
