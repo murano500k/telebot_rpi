@@ -75,16 +75,7 @@ def print_relay_pins(chat_id):
     bot.sendMessage(chat_id, reply, disable_web_page_preview=True)
 
 
-def send_cmd(chat_id, cmd):
-    bot.sendChatAction(chat_id, 'typing')
-    print("cmd: " + cmd)
 
-    rNum = int(cmd.split(" ")[1])
-    rVal = int(cmd.split(" ")[2])
-    GPIO.output(rNum, rVal)
-    reply = str(rNum) + " RELAY_PIN: " + str(rVal)
-    print(reply)
-    bot.sendMessage(chat_id, reply, disable_web_page_preview=True)
 
 
 class YourBot(telepot.Bot):
@@ -119,54 +110,54 @@ class YourBot(telepot.Bot):
                     bot.sendChatAction(chat_id, 'typing')
                     tmperiod = "Last %.2f hours" % ((datetime.now() - graphstart).total_seconds() / 3600)
                     bot.sendPhoto(chat_id, plotmemgraph(memlist, xaxis, tmperiod))
-                elif msg['text'] == "/rget":
-<<<<<<< HEAD
+
+                elif msg['text'] == "/read":
                     print_relay_pins(chat_id)
-=======
-                    printRelayPins(chat_id)
-<<<<<<< HEAD
-=======
-                elif msg['text'] == "/dht":
-                    bot.sendChatAction(chat_id, 'typing')
-                    p = Popen("/home/pi/Adafruit_Python_DHT/examples/AdafruitDHT.py 22 18", shell=True, stdin=PIPE, stdout=PIPE, stderr=STDOUT, close_fds=True)
-                    output = p.stdout.read()
-                    if output != b'':
-                        bot.sendMessage(chat_id, output, disable_web_page_preview=True)
-                    else:
-                        bot.sendMessage(chat_id, "No output.", disable_web_page_preview=True)
->>>>>>> 8703d86ea132a93b999da21ca30c10e1004f8f90
->>>>>>> 01c05774772327fed6f9e0e060af3e7303c4d01d
-                elif "/rcmd" in msg['text']:
-                    send_cmd(chat_id, msg['text'])
+                elif msg['text'] == "/write":
+                    write_cmd(chat_id, msg['text'])
                 elif msg['text'] == "/capture":
-                    bot.sendChatAction(chat_id, 'upload_photo')
-                    p = Popen('/bin/capture', shell=True, stdin=PIPE, stdout=PIPE, stderr=STDOUT, close_fds=True)
-                    output = p.stdout.read()
-                    if output != b'':
-                        bot.sendPhoto(chat_id=chat_id, photo=open('/home/pi/captures/image.jpg', 'rb'))
-                    else:
-                        bot.sendMessage(chat_id, "Something wrong", disable_web_page_preview=True)
-<<<<<<< HEAD
+                    get_photo(chat_id)
+                elif msg['text'] == "/temp":
+                    get_temp(chat_id)
+                elif msg['text'] == "/getall":
+                    print_relay_pins(chat_id)
+                    get_temp(chat_id)
+                    get_photo(chat_id)
+
+
+def write_cmd(chat_id, cmd):
+    bot.sendChatAction(chat_id, 'typing')
+    print("cmd: " + cmd)
+    rNum = int(cmd.split(" ")[1])
+    rVal = int(cmd.split(" ")[2])
+    GPIO.output(rNum, rVal)
+    reply = str(rNum) + " RELAY_PIN: " + str(rVal)
+    print(reply)
+    print_relay_pins(chat_id)
+
+
+def get_photo(chat_id):
+    bot.sendChatAction(chat_id, 'upload_photo')
+    p = Popen('/bin/capture', shell=True, stdin=PIPE, stdout=PIPE, stderr=STDOUT, close_fds=True)
+    output = p.stdout.read()
+    if output != b'':
+        bot.sendPhoto(chat_id=chat_id, photo=open('/home/pi/captures/image.jpg', 'rb'))
+    else:
+        bot.sendMessage(chat_id, "Something wrong", disable_web_page_preview=True)
+
+
+def get_temp(chat_id):
+    bot.sendChatAction(chat_id, 'typing')
+    p = Popen('/home/pi/telebot_rpi/sensor.sh', shell=True, stdin=PIPE, stdout=PIPE,
+              stderr=STDOUT, close_fds=True)
+    output = p.stdout.read()
+    if output != b'':
+        bot.sendMessage(chat_id, output, disable_web_page_preview=True)
+    else:
+        bot.sendMessage(chat_id, "Something wrong", disable_web_page_preview=True)
 
 
 def print_stats(chat_id):
-=======
-<<<<<<< HEAD
-                elif msg['text'] == "/temp":
-=======
-        elif msg['text'] == "/temp":
->>>>>>> 8703d86ea132a93b999da21ca30c10e1004f8f90
-                    bot.sendChatAction(chat_id, 'typing')
-                    p = Popen('/home/pi/Adafruit_Python_DHT/examples/AdafruitDHT.py  22 18', shell=True, stdin=PIPE, stdout=PIPE, stderr=STDOUT, close_fds=True)
-                    output = p.stdout.read()
-                    if output != b'':
-                        bot.sendMessage(chat_id, output, disable_web_page_preview=True)
-                    else:
-                        bot.sendMessage(chat_id, "Something wrong", disable_web_page_preview=True)
-
-                        
-def printStats(chat_id):
->>>>>>> 01c05774772327fed6f9e0e060af3e7303c4d01d
     bot.sendChatAction(chat_id, 'typing')
     memory = psutil.virtual_memory()
     disk = psutil.disk_usage('/')
