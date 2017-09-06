@@ -113,7 +113,7 @@ class YourBot(telepot.Bot):
 
                 elif msg['text'] == "/read":
                     print_relay_pins(chat_id)
-                elif msg['text'] == "/write":
+                elif "/write" in msg['text']:
                     write_cmd(chat_id, msg['text'])
                 elif msg['text'] == "/capture":
                     get_photo(chat_id)
@@ -124,7 +124,7 @@ class YourBot(telepot.Bot):
                     get_temp(chat_id)
                     get_photo(chat_id)
                 else:
-                    bot.sendMessage(chat_id, "command not found:"+msg['text'], disable_web_page_preview=True)
+                    bot.sendMessage(chat_id, "command not found:" + msg['text'], disable_web_page_preview=True)
 
 
 def write_cmd(chat_id, cmd):
