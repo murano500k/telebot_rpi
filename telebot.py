@@ -113,7 +113,7 @@ class YourBot(telepot.Bot):
 
                 elif msg['text'] == "/read":
                     print_relay_pins(chat_id)
-                elif "/write" in msg['text']:
+                elif msg['text'].find("/write") != -1:
                     write_cmd(chat_id, msg['text'])
                 elif msg['text'] == "/capture":
                     get_photo(chat_id)
