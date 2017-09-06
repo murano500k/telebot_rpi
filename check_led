@@ -1,0 +1,11 @@
+#!/bin/bash
+export HOUR_ON = 2
+export HOUR_OFF = 20
+HOURS=`date +"%H"`
+if [ $HOURS -gt $HOUR_OFF ] || [ $HOURS -lt $HOUR_ON ]; then
+  echo "led 0"
+  /usr/bin/led 0
+else 
+  echo "led 1"
+  /usr/bin/led 1
+fi
