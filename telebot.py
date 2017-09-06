@@ -125,7 +125,7 @@ def print_relay_pins(chat_id):
 
 
 def write_cmd(chat_id, cmd):
-    bot.sendChatAction(chat_id, 'typing')
+    bot.sendChatAction(chat_id, 'upload_document')
     print("cmd: " + cmd)
     rNum = int(cmd.split(" ")[1])
     rVal = int(cmd.split(" ")[2])
@@ -147,7 +147,7 @@ def get_photo(chat_id):
 
 
 def get_temp(chat_id):
-    bot.sendChatAction(chat_id, 'typing')
+    bot.sendChatAction(chat_id, 'record_video_note')
     p = Popen('/home/pi/telebot_rpi/sensor.sh', shell=True, stdin=PIPE, stdout=PIPE,
               stderr=STDOUT, close_fds=True)
     output = p.stdout.read()
