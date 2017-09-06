@@ -123,6 +123,8 @@ class YourBot(telepot.Bot):
                     print_relay_pins(chat_id)
                     get_temp(chat_id)
                     get_photo(chat_id)
+                else:
+                    bot.sendMessage(chat_id, "command not found:"+msg['text'], disable_web_page_preview=True)
 
 
 def write_cmd(chat_id, cmd):
