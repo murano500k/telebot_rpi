@@ -1,0 +1,5 @@
+#!/bin/bash
+FILENAME=`date +"%D_%M_%Y_%H-%M-%S"`
+rsync  /home/pi/captures/image.jpg artem@$IP_HOME:/home/artem/rpi/captures/$FILENAME.jpg
+
+
