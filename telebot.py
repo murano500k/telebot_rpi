@@ -63,6 +63,7 @@ class YourBot(telepot.Bot):
         super(YourBot, self).__init__(*args, **kwargs)
         self._answerer = telepot.helper.Answerer(self)
         self._message_with_inline_keyboard = None
+        self.sendMessage("197882762", "I'm online!")
 
     def on_chat_message(self, msg):
         content_type, chat_type, chat_id = telepot.glance(msg)
@@ -197,6 +198,7 @@ GPIO.setup(RELAY_PIN4, GPIO.OUT)
 GPIO.setup(RELAY_PIN5, GPIO.OUT)
 bot = YourBot(TOKEN)
 bot.message_loop()
+
 tr = 0
 xx = 0
 # Keep the program running.

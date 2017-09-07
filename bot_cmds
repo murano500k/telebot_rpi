@@ -1,8 +1,8 @@
 capture - get a photo
-read - print relays status
-write - send on/off command (format write PIN VALUE)
-temp - get temp and humidity
-getall - get all data
+readpin - print relays status
+writepin - send on/off command (format write PIN VALUE)
+sensor - get temp and humidity
+all - get all data
 stop - stop all
 stats - gives summed statistics about memory \ disk \ processes
 shell - goes into the mode of executing shell commands & sends you the output
