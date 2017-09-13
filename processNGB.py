@@ -16,6 +16,8 @@
 import os
 import sys
 
+import matplotlib
+matplotlib.use('Agg')
 import matplotlib.image as mpimg
 import matplotlib.pyplot as plt
 
