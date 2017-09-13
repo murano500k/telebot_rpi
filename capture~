@@ -1,6 +1,6 @@
 #!/bin/bash
 mkdir -p ~/captures
-raspistill -awb off -awbg 1.28,0.57 -v -o ~/captures/image.jpg
+raspistill -awb off -awbg 1.28,0.57 -v -o test_cam.jpg
 FILENAME=`date +"%d_%m_%y_%H-%M-%S"`
 #rsync test_cam.jpg artem@murano500k.ddns.net://home/artem/captures/in/$FILENAME.jpg
 #ssh artem@murano500k.ddns.net -c "/home/artem/projects/telebot_rpi/ndvi.sh $FILENAME.jpg"
