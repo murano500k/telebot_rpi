@@ -1,4 +1,5 @@
 capture - get a photo
+ndvi - get an ndvi photo
 readpin - print relays status
 writepin - send on/off command (format write PIN VALUE)
 sensor - get temp and humidity

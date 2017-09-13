@@ -1,9 +1,4 @@
 #!/bin/bash
 mkdir -p ~/captures
 raspistill -awb off -awbg 1.28,0.57 -o ~/captures/image.jpg
-FILENAME=`date +"%d_%m_%y_%H-%M-%S"`
-rsync ~/captures/image.jpg artem@murano500k.ddns.net://home/artem/captures/in/image.jpg
-ssh artem@murano500k.ddns.net '/home/artem/projects/telebot_rpi/ndvi.sh'
-rsync artem@murano500k.ddns.net://home/artem/captures/out/ndvi_image.jpg /home/pi/captures/image.jpg
-
 

@@ -139,6 +139,17 @@ def get_photo(chat_id):
         bot.sendPhoto(chat_id=chat_id, photo=open('/home/pi/captures/image.jpg', 'rb'))
     else:
         bot.sendMessage(chat_id, "Something wrong", disable_web_page_preview=True)
+    get_ndvi(chat_id)
+
+
+def get_ndvi(chat_id):
+    bot.sendChatAction(chat_id, 'upload_photo')
+    p = Popen('/home/pi/telebot_rpi/capture_ndvi', shell=True, stdin=PIPE, stdout=PIPE, stderr=STDOUT, close_fds=True)
+    output = p.stdout.read()
+    if output != b'':
+        bot.sendPhoto(chat_id=chat_id, photo=open('/home/pi/captures/ndvi_image.jpg', 'rb'))
+    else:
+        bot.sendMessage(chat_id, "Something wrong", disable_web_page_preview=True)
 
 
 def get_temp(chat_id):
