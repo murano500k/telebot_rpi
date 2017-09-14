@@ -16,7 +16,7 @@ else
 fi
 
 echo "syncing $FROM_DIR to $TO_DIR"
-mkdir -p $TO_DIR
+mkdir -p ~/$TO_DIR
 rsync -rvl artem@$IP_HOME:/home/artem/$FROM_DIR/ ~/$TO_DIR/
 if [ $? -ne 0 ]; then
   echo error

@@ -13,7 +13,7 @@ else
   TO_DIR=$2
 fi
 echo "syncing $FROM_DIR to $TO_DIR"
-mkdir -p $TO_DIR
+mkdir -p ~/$TO_DIR
 
 rsync -rvl pi@$IP_PI:/home/pi/$FROM_DIR/ ~/$TO_DIR/
 if [ $? -ne 0 ]; then
