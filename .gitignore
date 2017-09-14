@@ -101,3 +101,7 @@ ENV/
 .mypy_cache/
 
 .idea/*
+infrapix
+telegram-send
+.ndvi.swp
+tokens.py
