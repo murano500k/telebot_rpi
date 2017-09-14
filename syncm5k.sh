@@ -1,5 +1,6 @@
 #!/bin/bash
-IP_HOME=192.168.0.108
+#IP_HOME=192.168.0.108
+IP_HOME=murano500k.ddns.net
 
 if [ -z $1 ]; then
   echo "No param"

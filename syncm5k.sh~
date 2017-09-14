@@ -1,4 +1,6 @@
 #!/bin/bash
+IP_HOME=192.168.0.108
+
 if [ -z $1 ]; then
   echo "No param"
   echo '$1 - from dir, relative to /home/pi/, no / at the end'
@@ -11,10 +13,10 @@ if [ -z $2 ]; then
 else
   TO_DIR=$2
 fi
-HOME_IP=192.168.0.108
+
 echo "syncing $FROM_DIR to $TO_DIR"
 mkdir -p $TO_DIR
-rsync -rvl artem@$HOME_IP:/home/artem/$FROM_DIR/ ~/$TO_DIR/
+rsync -rvl artem@$IP_HOME:/home/artem/$FROM_DIR/ ~/$TO_DIR/
 if [ $? -ne 0 ]; then
   echo error
   exit 1
