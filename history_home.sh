@@ -1,10 +1,10 @@
 #!/bin/bash
 IP_PI=192.168.0.139
 
-LED=`gpio read 22`
+LED=`ssh pi@$IP_PI gpio read 22`
 if [ $LED -eq 0 ]; then
   echo "No light!"
-  exit
+  exit 
 fi
 
 ssh pi@$IP_PI /home/pi/telebot_rpi/capture

@@ -1,5 +1,0 @@
-#!/bin/bash
-mkdir -p ~/captures
-raspistill -awb off -awbg 1.28,0.57 -hf -o ~/captures/image.jpg
-echo ~/captures/image.jpg
-
