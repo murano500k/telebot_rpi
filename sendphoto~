@@ -1,0 +1,4 @@
+#!/bin/bash
+FILENAME=`date +"%d_%m_%y_%H-%M-%S"`
+rsync  /home/pi/captures/image.jpg artem@$IP_HOME:/home/artem/captures/$FILENAME.jpg
+ssh -c artem@$IP_HOME '/home/artem/captures/ndvi.sh /home/artem/captures/$FILENAME.jpg'
