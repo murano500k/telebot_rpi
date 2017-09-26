@@ -1,0 +1,5 @@
+#!/bin/bash
+export ON=12
+export OFF=8
+export LED=22
+export HPS=23

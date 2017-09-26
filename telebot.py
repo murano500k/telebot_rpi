@@ -201,12 +201,6 @@ def print_stats(chat_id):
 
 TOKEN = telegrambot
 GPIO.setwarnings(False)
-GPIO.setmode(GPIO.BCM)  # set board mode to Broadcom
-GPIO.setup(RELAY_PIN1, GPIO.OUT)
-GPIO.setup(RELAY_PIN2, GPIO.OUT)
-GPIO.setup(RELAY_PIN3, GPIO.OUT)
-GPIO.setup(RELAY_PIN4, GPIO.OUT)
-GPIO.setup(RELAY_PIN5, GPIO.OUT)
 bot = YourBot(TOKEN)
 bot.message_loop()
 
