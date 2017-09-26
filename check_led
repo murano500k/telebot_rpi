@@ -4,11 +4,7 @@ NOW=`date +"%H"`
 echo NOW=$NOW
 echo ON=$ON
 echo OFF=$OFF
-<<<<<<< HEAD
 if [ $HOURS -ge $OFF && $HOURS -le $HOUR_ON ]; then
-=======
-if [ $HOURS -ge $OFF ] || [ $HOURS -le $HOUR_ON ]; then
->>>>>>> ff1ae20f38fba533da52b0a70b4d1a03e96932d7
   echo "OFF"
   /home/pi/led 0
 else
