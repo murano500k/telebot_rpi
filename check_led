@@ -1,12 +1,13 @@
 #!/bin/bash
-export HOUR_ON=2
-export HOUR_OFF=20
-HOURS=`date +"%H"`
-echo HOURS=$HOURS
-if [ $HOURS -ge $HOUR_OFF ] || [ $HOURS -le $HOUR_ON ]; then
-  echo "led 0"
+. /home/pi/env_vars
+NOW=`date +"%H"`
+echo NOW=$NOW
+echo ON=$ON
+echo OFF=$OFF
+if [ $HOURS -ge $OFF && $HOURS -le $HOUR_ON ]; then
+  echo "OFF"
   /home/pi/led 0
 else
-  echo "led 1"
+  echo "ON"
   /home/pi/led 1
 fi
