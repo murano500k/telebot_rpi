@@ -4,10 +4,12 @@ NOW=`date +"%H"`
 echo NOW=$NOW
 echo ON=$ON
 echo OFF=$OFF
-if [ $HOURS -ge $OFF && $HOURS -le $HOUR_ON ]; then
+if [ $NOW -ge $OFF ] && [ $NOW -lt $ON ]; then
   echo "OFF"
   /home/pi/led 0
+  /home/pi/hps 0
 else
   echo "ON"
   /home/pi/led 1
+  /home/pi/hps 1
 fi
