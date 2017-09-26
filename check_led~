@@ -3,9 +3,9 @@ export HOUR_ON=2
 export HOUR_OFF=20
 HOURS=`date +"%H"`
 echo HOURS=$HOURS
-if [ $HOURS -gt $HOUR_OFF ] || [ $HOURS -lt $HOUR_ON ]; then
+if [ $HOURS -ge $HOUR_OFF ] || [ $HOURS -le $HOUR_ON ]; then
   echo "led 0"
-  /home/pi/telebot_rpi/led 0
+  /home/pi/led 0
 else
   echo "led 1"
   /home/pi/telebot_rpi/led 1

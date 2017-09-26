@@ -110,7 +110,7 @@ class YourBot(telepot.Bot):
 
 def print_relay_pins(chat_id):
     bot.sendChatAction(chat_id, 'typing')
-    p = Popen('/home/pi/telebot_rpi/readpin', shell=True, stdin=PIPE, stdout=PIPE,
+    p = Popen('/home/pi/readpin', shell=True, stdin=PIPE, stdout=PIPE,
               stderr=STDOUT, close_fds=True)
     output = p.stdout.read()
     if output != b'':
@@ -123,7 +123,7 @@ def write_cmd(chat_id, cmd):
     bot.sendChatAction(chat_id, 'upload_document')
     rNum = int(cmd.split(" ")[1])
     rVal = int(cmd.split(" ")[2])
-    p = Popen('/home/pi/telebot_rpi/writepin ' + str(rNum) + ' ' + str(rVal), shell=True, stdin=PIPE, stdout=PIPE,
+    p = Popen('/home/pi/writepin ' + str(rNum) + ' ' + str(rVal), shell=True, stdin=PIPE, stdout=PIPE,
           stderr=STDOUT, close_fds=True)
     output = p.stdout.read()
     if output != b'':
@@ -133,7 +133,7 @@ def write_cmd(chat_id, cmd):
 
 def get_photo(chat_id):
     bot.sendChatAction(chat_id, 'upload_photo')
-    p = Popen('/home/pi/telebot_rpi/capture', shell=True, stdin=PIPE, stdout=PIPE, stderr=STDOUT, close_fds=True)
+    p = Popen('/home/pi/capture', shell=True, stdin=PIPE, stdout=PIPE, stderr=STDOUT, close_fds=True)
     output = p.stdout.read()
     if output != b'':
         bot.sendPhoto(chat_id=chat_id, photo=open('/home/pi/captures/image.jpg', 'rb'))
@@ -144,7 +144,7 @@ def get_photo(chat_id):
 
 def get_ndvi(chat_id):
     bot.sendChatAction(chat_id, 'upload_photo')
-    p = Popen('/home/pi/telebot_rpi/capture_ndvi', shell=True, stdin=PIPE, stdout=PIPE, stderr=STDOUT, close_fds=True)
+    p = Popen('/home/pi/capture_ndvi', shell=True, stdin=PIPE, stdout=PIPE, stderr=STDOUT, close_fds=True)
     output = p.stdout.read()
     if output != b'':
         bot.sendPhoto(chat_id=chat_id, photo=open('/home/pi/captures/ndvi_image.jpg', 'rb'))
@@ -154,7 +154,7 @@ def get_ndvi(chat_id):
 
 def get_temp(chat_id):
     bot.sendChatAction(chat_id, 'record_video_note')
-    p = Popen('/home/pi/telebot_rpi/sensor', shell=True, stdin=PIPE, stdout=PIPE,
+    p = Popen('/home/pi/sensor', shell=True, stdin=PIPE, stdout=PIPE,
               stderr=STDOUT, close_fds=True)
     output = p.stdout.read()
     if output != b'':

@@ -1,5 +1,10 @@
 #!/bin/bash
+LED=`gpio read 22`
+if [ $LED -eq 0 ]; then
+  echo "no light!"
+  exit 1
+fi
 mkdir -p ~/captures
-raspistill -awb off -awbg 1.28,0.57 -vf -o ~/captures/image.jpg
+raspistill -awb off -awbg 1.28,0.57 -o ~/captures/image.jpg
 echo ~/captures/image.jpg
 

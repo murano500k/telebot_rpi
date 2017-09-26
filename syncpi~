@@ -1,0 +1,4 @@
+#!/bin/bash
+IP_PI=192.168.0.139
+rsync -rvl ~/projects/telebot_rpi/ pi@$IP_PI:/home/pi/
+

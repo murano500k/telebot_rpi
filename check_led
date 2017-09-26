@@ -5,8 +5,8 @@ HOURS=`date +"%H"`
 echo HOURS=$HOURS
 if [ $HOURS -ge $HOUR_OFF ] || [ $HOURS -le $HOUR_ON ]; then
   echo "led 0"
-  /home/pi/telebot_rpi/led 0
+  /home/pi/led 0
 else
   echo "led 1"
-  /home/pi/telebot_rpi/led 1
+  /home/pi/led 1
 fi
