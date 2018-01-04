@@ -11,5 +11,6 @@ function jsonval {
 #https://api.thingspeak.com/channels/330894/feeds.json?results=1
 json=`curl -s -X GET https://api.thingspeak.com/channels/330894/feeds.json?results=1`
 prop="field$1"
-result=`jsonval`
-echo $result
+resultf=`jsonval`
+resulti="${resultf%\.*}"
+echo $resulti

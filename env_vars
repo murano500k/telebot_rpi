@@ -2,14 +2,13 @@
 export ON=7
 export OFF=1
 export LED=22
-export HPS=23
-export SHROOMS_LIGHT=24
-export SHROOMS_WIND=25
-export SHROOMS_HEAT=22
+export HPS=21
+export SHROOMS_LIGHT=25
+export SHROOMS_WIND=24
+export SHROOMS_HEAT=23
 
 export SHROOMS_LIGHT_ON=8
 export SHROOMS_LIGHT_OFF=18
 
 export SHROOMS_MIN_TEMP=26
 export SHROOMS_MAX_TEMP=30
-

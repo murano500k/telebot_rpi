@@ -26,7 +26,7 @@ else
 fi
 
 
-TEMP=`get_field_value.sh 1`
+TEMP=`/home/pi/get_field_value.sh 1`
 echo TEMP=$TEMP
 if [ $TEMP -lt $SHROOMS_MIN_TEMP ]; then
     /home/pi/shrooms_heat 1
