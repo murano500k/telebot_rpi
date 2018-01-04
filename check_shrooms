@@ -1,0 +1,35 @@
+#!/bin/bash
+. /home/pi/env_vars
+NOW=`date +"%H"`
+echo NOW=$NOW
+echo SHROOMS_LIGHT_ON=$SHROOMS_LIGHT_ON
+echo SHROOMS_LIGHT_OFF=$SHROOMS_LIGHT_OFF
+if [ $NOW -ge $SHROOMS_LIGHT_OFF ] && [ $NOW -lt $SHROOMS_LIGHT_ON ]; then
+  echo "SHROOMS_LIGHT_OFF"
+  /home/pi/shrooms_light 0
+else
+  echo "SHROOMS_LIGHT_ON"
+  /home/pi/shrooms_light 1
+fi
+
+
+
+NOW_MINUTES=`date +"%M"`
+echo NOW_MINUTES=$NOW_MINUTES
+
+if [ $NOW_MINUTES -lt 10 ]; then
+  echo "WIND ON"
+  /home/pi/shrooms_wind 1
+else
+  echo "WIND OFF"
+  /home/pi/shrooms_wind 0
+fi
+
+
+TEMP=`get_field_value.sh 1`
+echo TEMP=$TEMP
+if [ $TEMP -lt $SHROOMS_MIN_TEMP ]; then
+    /home/pi/shrooms_heat 1
+elif [ $TEMP -gt $SHROOMS_MAX_TEMP ]; then
+    /home/pi/shrooms_heat 0
+fi
