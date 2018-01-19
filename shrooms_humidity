@@ -1,0 +1,9 @@
+#!/bin/bash
+. /home/pi/env_vars
+if [ -z $1 ]; then
+  echo "Usage: led [0, 1]"
+  exit 1
+fi
+
+gpio mode $SHROOMS_HUMIDITY out
+gpio write $SHROOMS_HUMIDITY $1

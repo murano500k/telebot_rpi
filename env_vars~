@@ -1,6 +1,6 @@
 #!/bin/bash
 
-export HOURS_WIND_ON=(12, 14, 15, 16, 17)
+export HOURS_WIND_ON=(12, 14, 15, 16, 17, 18)
 export ON=7
 export OFF=1
 export LED=22

@@ -29,7 +29,7 @@ echo NOW_HOURS=$NOW_HOURS
 
 
 ###############
-
+HOURS_WIND_ON=(12, 14, 15, 16, 17, 18)
 is_wind_on=0
 for i in "${HOURS_WIND_ON[@]}"
 do
